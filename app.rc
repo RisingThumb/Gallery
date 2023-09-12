@@ -1,0 +1,18 @@
+fn conf_enable_gallery {
+    enable_gallery=yes
+    conf_enable_app gallery
+}
+
+fn gallery_init {
+    if (! ~ $#enable_gallery 0 ) {
+        fn dir_listing_handler {
+            d=`{basename -d $1}
+            if(~ $#d 0)
+                d='/'
+            echo '<h1 class="dir-list-fail">'$gallery_name'</h1> <ul class="dir-list">'
+            # Symlinks suck: '/.' forces ls to list the linked dir if $d is a symlink.
+            ls -F $dir_listing_ls_opts $sitedir$d/. | grep -v '/$' | sed $dirfilter$dirclean' s,.*/([^/]+/?)$,<li style="width:100%;"><a href="\1"><img src="\1" alt="test" class="gallery"></img></a></li>,'
+            echo '</ul>'
+        }
+    }
+}
