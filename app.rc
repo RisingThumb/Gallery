@@ -11,7 +11,7 @@ fn gallery_init {
                 d='/'
             echo '<h1 class="dir-list-fail">'$gallery_name'</h1> <ul class="dir-list">'
             # Symlinks suck: '/.' forces ls to list the linked dir if $d is a symlink.
-            ls -F $dir_listing_ls_opts $sitedir$d/. | grep -v '/$' | sed $dirfilter$dirclean' s,.*/([^/]+/?)$,<li style="width:100%;"><a href="\1"><img src="\1" alt="test" class="gallery"></img></a></li>,'
+            ls -F $dir_listing_ls_opts $sitedir$d/. | grep -v '/$' | sed $dirfilter$dirclean' s,.*/([^/]+/?)$,<li style="width:100%;"><a href="\1"><img src="\1" alt="\1" class="gallery"></img></a></li>,'
             echo '</ul>'
         }
     }
